@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JDM FANS</title>
+        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="/colors.css">
+        <link rel="stylesheet" href="/src/css/style.css">
+        <script src="https://cdn.pocketbase.io/js/pbjs-0.8.0.min.js"></script>
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    </head>
+    <body class="bg-gray-900 text-white">
+        <!-- Overlay for mobile sidebar -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+        <!-- Sidebar Toggle Button -->
+        <button id="toggle-sidebar" class="fixed top-4 left-4 z-50 lg:hidden bg-black p-2 rounded-lg hover:bg-gray-700">
+            <span class="block w-6 h-0.5 bg-white mb-1"></span>
+            <span class="block w-6 h-0.5 bg-white mb-1"></span>
+            <span class="block w-6 h-0.5 bg-white"></span>
+        </button>
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full lg:translate-x-0">
+            <div class="h-full px-3 py-4 bg-black border-r border-gray-900">
+                <div class="mb-6 px-2">
+                    <a href="../../index.html"><h2 class="text-3xl font-bold text-center">JDM FANS</h2></a>
+                </div>
+                <nav class="space-y-2">
+                    <!-- Marcas de coches -->
+                    <div class="px-2 py-2">
+                        <h2 class="text-gray-200 text-sm uppercase mb-2 px-3 font-semibold">Marcas</h2>
+                        <div class="space-y-1">
+                            <div class="flex items-center">
+                                <img src="/src/images/toyota-logo.png" alt="Toyota Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/toyota.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Toyota</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/nissan-logo.png" alt="Nissan Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/nissan.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Nissan</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/mitsubishi-logo.png" alt="Mitsubishi Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/mitsubishi.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Mitsubishi</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/honda-logo.png" alt="Honda Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/honda.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Honda</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/mazda-logo.png" alt="Mazda Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/mazda.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Mazda</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/acura-logo.png" alt="Acura Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/acura.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Acura</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/subaru-logo.png" alt="Subaru Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/subaru.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Subaru</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+        <!-- Main Content -->
+        <div id="main-content" class="lg:ml-64 min-h-screen flex flex-col">
+            <!-- Header -->
+            <header class="sticky top-0 z-20 bg-gray-800 border-b border-gray-700 shadow-lg">
+                <div class="flex items-center justify-end h-16 px-4 lg:px-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="search" 
+                                   id="searchInput"
+                                   placeholder="Buscar..." 
+                                   class="w-full px-4 py-2 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500 bg-gray-700 text-white placeholder-gray-400"
+                            >
+                            <button id="searchButton" class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <!-- Auth Buttons -->
+                            <div id="auth-buttons">
+                                <a href="/login.html" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-colors">Login</a>
+                                <a href="/register.html" class="px-4 py-2 rounded-lg border border-red-600 hover:bg-red-600 text-white transition-colors">Registro</a>
+                            </div>
+                            
+                            <!-- Profile Menu -->
+                            <div id="profile-menu" class="hidden relative">
+                                <button id="profile-button" class="flex items-center space-x-2 focus:outline-none">
+                                    <img id="profile-icon" src="/profile-default.jpg" alt="Perfil" class="w-8 h-8 rounded-full">
+                                    <span id="username-display" class="text-white"></span>
+                                </button>
+                                
+                                <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-gray-800 border border-gray-700">
+                                    <div class="py-1">
+                                        <a href="/profile.html" class="block px-4 py-2 text-sm text-white hover:bg-red-600 transition-colors">Mi Perfil</a>
+                                        <a href="/favorites.html" class="block px-4 py-2 text-sm text-white hover:bg-red-600 transition-colors">Favoritos</a>
+                                        <button id="logout-button" class="block w-full text-left px-4 py-2 text-sm text-white hover:bg-red-600 transition-colors">Cerrar Sesión</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="flex-1 p-4 lg:p-6">
+                <div class="banner">
+                    <img src="/src/images/banner.jpg" alt="Banner JDM" class="banner-img">
+                </div>
+
+                <h1 class="text-4xl font-bold">JDM FANS-Shop</h1>
+                <svg width="32" height="24" viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="24" fill="white" stroke="black" stroke-width="0.5"/>
+                    <circle cx="16" cy="12" r="6" fill="red"/>
+                </svg>
+
+                <br>
+                
+                <section class="catalogo">
+                    <article class="coche">
+                        <img src="/hot-wheels/240sx.jpg" alt="Nissan 240SX" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Nissan 240SX</a></h2>
+                        <p>El Nissan 240SX es conocido por su equilibrio y manejo, ideal para el drifting y la modificación.</p>
+                        <p class="text-lg font-bold">Precio: $25.00</p>
+                        <a href="http://example.com/buy240sx" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/3000GT.jpg" alt="Mitsubishi 3000GT" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Mitsubishi 3000GT</a></h2>
+                        <p>El Mitsubishi 3000GT es un deportivo de alto rendimiento con tracción en las cuatro ruedas y un motor potente.</p>
+                        <p class="text-lg font-bold">Precio: $30.00</p>
+                        <a href="http://example.com/buy3000GT" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/370z.jpg" alt="Nissan 370Z" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Nissan 370Z</a></h2>
+                        <p>El Nissan 370Z es un coupé deportivo que combina un diseño elegante con un motor V6 potente.</p>
+                        <p class="text-lg font-bold">Precio: $35.00</p>
+                        <a href="http://example.com/buy370z" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/celica.jpg" alt="Toyota Celica" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Toyota Celica</a></h2>
+                        <p>El Toyota Celica es un coche compacto deportivo que ha sido un favorito entre los entusiastas de JDM.</p>
+                        <p class="text-lg font-bold">Precio: $20.00</p>
+                        <a href="http://example.com/buycelica" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/civic.jpg" alt="Honda Civic" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Honda Civic</a></h2>
+                        <p>El Honda Civic es conocido por su fiabilidad y eficiencia, además de ser fácil de modificar.</p>
+                        <p class="text-lg font-bold">Precio: $18.00</p>
+                        <a href="http://example.com/buycivic" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/eclipse.jpg" alt="Mitsubishi Eclipse" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Mitsubishi Eclipse</a></h2>
+                        <p>El Mitsubishi Eclipse es un coche deportivo que ganó popularidad en la cultura JDM y en películas.</p>
+                        <p class="text-lg font-bold">Precio: $22.00</p>
+                        <a href="http://example.com/buyeclipse" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/evo.jpg" alt="Mitsubishi Lancer Evolution" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Mitsubishi Lancer Evolution</a></h2>
+                        <p>El Lancer Evolution es un ícono del rally, conocido por su rendimiento y capacidad en carretera.</p>
+                        <p class="text-lg font-bold">Precio: $45.00</p>
+                        <a href="http://example.com/buyevo" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/gtr-r34.jpg" alt="Nissan GT-R R34" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Nissan GT-R R34</a></h2>
+                        <p>El GT-R R34 es un coche legendario, famoso por su tecnología avanzada y rendimiento excepcional.</p>
+                        <p class="text-lg font-bold">Precio: $60.00</p>
+                        <a href="http://example.com/buygtr34" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/gtr-r35.jpg" alt="Nissan GT-R R35" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Nissan GT-R R35</a></h2>
+                        <p>El GT-R R35 es un superdeportivo que combina potencia y tecnología de punta para una experiencia de conducción inigualable.</p>
+                        <p class="text-lg font-bold">Precio: $70.00</p>
+                        <a href="http://example.com/buygtr35" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/rx3.jpg" alt="Mazda RX-3" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Mazda RX-3</a></h2>
+                        <p>El Mazda RX-3 es un coche deportivo clásico, conocido por su motor rotativo y su ligereza.</p>
+                        <p class="text-lg font-bold">Precio: $25.00</p>
+                        <a href="http://example.com/buyrx3" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/rx7.jpg" alt="Mazda RX-7" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Mazda RX-7</a></h2>
+                        <p>El RX-7 es famoso por su motor rotativo y su agilidad en la pista.</p>
+                        <p class="text-lg font-bold">Precio: $30.00</p>
+                        <a href="http://example.com/buyrx7" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/s2000.jpg" alt="Honda S2000" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Honda S2000</a></h2>
+                        <p>El S2000 es un roadster conocido por su motor de alta revolución y su manejo preciso.</p>
+                        <p class="text-lg font-bold">Precio: $40.00</p>
+                        <a href="http://example.com/buys2000" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/s2000-2.jpg" alt="Honda S2000 (Version 2)" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Honda S2000 (Version 2)</a></h2>
+                        <p>Otra versión del famoso S2000, manteniendo su esencia deportiva y rendimiento.</p>
+                        <p class="text-lg font-bold">Precio: $42.00</p>
+                        <a href="http://example.com/buys2000v2" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/supra.jpg" alt="Toyota Supra" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Toyota Supra</a></h2>
+                        <p>El Toyota Supra es un ícono del tuning y la cultura JDM, conocido por su gran potencial de modificación.</p>
+                        <p class="text-lg font-bold">Precio: $50.00</p>
+                        <a href="http://example.com/buysupra" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                
+                    <article class="coche">
+                        <img src="/hot-wheels/trueno.jpg" alt="Toyota Trueno" class="w-full h-96 object-cover rounded">
+                        <h2><a href="#" class="hover:text-red-500 transition duration-300">Toyota Trueno</a></h2>
+                        <p>El Toyota Trueno es conocido por su participación en el mundo del drifting y su diseño icónico.</p>
+                        <p class="text-lg font-bold">Precio: $45.00</p>
+                        <a href="http://example.com/buytrueno" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Comprar</a>
+                    </article>
+                </section>
+                <section id="videos" class="my-8 p-4 bg-gray rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold mb-4">Videos Destacados</h2>
+                    <iframe src="https://www.youtube.com/embed/jArtwhX-d3E" frameborder="0" allowfullscreen class="w-280 h-120 mx-auto rounded-lg"></iframe>
+                </section>
+            </main>
+
+            <!-- Footer -->
+            <footer class="bg-gray-800 border-t border-gray-700 py-4">
+                <p class="text-center text-gray-400">&copy; 2025 Catálogo de Coches JDM | Todos los JDM iconicos</p>
+            </footer>
+        </div>
+
+        <script src="/src/js/search.js"></script>
+        <script src="/src/js/sidebar.js"></script>
+        <script>
+            // Initialize any remaining functionality
+            document.addEventListener('DOMContentLoaded', () => {
+                // Add any additional initialization here
+            });
+        </script>
+    </body>
+</html>

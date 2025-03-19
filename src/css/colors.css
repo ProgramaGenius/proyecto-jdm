@@ -1,0 +1,135 @@
+:root {
+    /* Colores básicos */
+    --color-negro: #000000;
+    --color-blanco: #ffffff;
+    --color-gris: #808080;
+    
+    /* Colores primarios */
+    --color-rojo: #ff0000;
+    --color-verde: #008000;
+    --color-azul: #0000ff;
+    --color-amarillo: #ffff00;
+    --color-naranja: #ffa500;
+    --color-morado: #800080;
+    --color-cian: #00ffff;
+    --color-magenta: #ff00ff;
+    
+    /* Colores extendidos */
+    --color-azul-marino: #000080;
+    --color-verde-oliva: #808000;
+    --color-gris-claro: #d3d3d3;
+    --color-gris-oscuro: #404040;
+    --color-rosa: #ff69b4;
+    --color-lima: #00ff00;
+    --color-violeta: #9400d3;
+    --color-marron: #a52a2a;
+    --color-dorado: #ffd700;
+    --color-plateado: #c0c0c0;
+    
+    /* Sombras y Transparencias */
+    --color-transparente: rgba(0, 0, 0, 0);
+    --color-sombra: rgba(0, 0, 0, 0.2);
+
+    /* 🌑 Colores Neutros */
+    --color-negro: #000000;
+    --color-blanco: #ffffff;
+    --color-gris-claro: #d3d3d3;
+    --color-gris: #808080;
+    --color-gris-oscuro: #404040;
+    --color-transparente: rgba(0, 0, 0, 0);
+    --color-sombra: rgba(0, 0, 0, 0.2);
+
+    /* 🔴 Colores Primarios */
+    --color-rojo: #ff0000;
+    --color-verde: #008000;
+    --color-azul: #0000ff;
+    
+    /* 🌈 Colores Secundarios */
+    --color-amarillo: #ffff00;
+    --color-naranja: #ffa500;
+    --color-morado: #800080;
+    --color-cian: #00ffff;
+    --color-magenta: #ff00ff;
+
+    /* 🌟 Colores Extendidos */
+    --color-azul-marino: #000080;
+    --color-verde-oliva: #808000;
+    --color-verde-lima: #00ff00;
+    --color-violeta: #9400d3;
+    --color-marron: #a52a2a;
+    --color-rosa: #ff69b4;
+    --color-dorado: #ffd700;
+    --color-plateado: #c0c0c0;
+    
+    /* 🌅 Tonos Pastel */
+    --color-rosa-pastel: #ffb6c1;
+    --color-azul-pastel: #aec6cf;
+    --color-verde-pastel: #77dd77;
+    --color-amarillo-pastel: #fdfd96;
+    --color-lavanda: #e6e6fa;
+    --color-durazno: #ffdab9;
+    --color-menta: #98ff98;
+
+    /* 🎭 Colores Oscuros y Profundos */
+    --color-burdeos: #800020;
+    --color-indigo: #4b0082;
+    --color-esmeralda: #50c878;
+    --color-zafiro: #0f52ba;
+    --color-granate: #8b0000;
+    --color-carbon: #333333;
+    --color-pizarra: #708090;
+
+    /* 🌍 Colores Naturales */
+    --color-arena: #c2b280;
+    --color-bosque: #228b22;
+    --color-mar: #2e8b57;
+    --color-tierra: #deb887;
+    --color-coral: #ff7f50;
+    --color-celeste: #87ceeb;
+
+    /* 🔥 Colores Intensos */
+    --color-rojo-fuego: #b22222;
+    --color-naranja-brillante: #ff4500;
+    --color-amarillo-dorado: #ffd700;
+    --color-azul-electrico: #007fff;
+    --color-verde-radioactivo: #39ff14;
+}
+
+/* Ejemplo de uso */
+body {
+    background-color: var(--color-blanco);
+    color: var(--color-negro);
+    font-family: Arial, sans-serif;
+}
+
+/* Botón con colores variables */
+.boton {
+    background-color: var(--color-azul);
+    color: var(--color-blanco);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.boton:hover {
+    background-color: var(--color-azul-marino);
+}
+
+/* Tarjeta de ejemplo */
+.tarjeta {
+    background-color: var(--color-gris-claro);
+    color: var(--color-negro);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--color-sombra);
+}
+
+/* Texto de advertencia */
+.texto-advertencia {
+    color: var(--color-rojo);
+    font-weight: bold;
+}
+
+

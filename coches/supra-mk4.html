@@ -1,0 +1,212 @@
+<!-- Common Header Template -->
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JDM FANS</title>
+        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="../colors.css">
+        <link rel="stylesheet" href="../src/css/style.css">
+        <script src="https://cdn.pocketbase.io/js/pbjs-0.8.0.min.js"></script>
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    </head>
+    <body class="bg-gray-900 text-white">
+        <!-- Overlay for mobile sidebar -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+        <!-- Sidebar Toggle Button -->
+        <button id="toggle-sidebar" class="fixed top-4 left-4 z-50 lg:hidden bg-black p-2 rounded-lg hover:bg-gray-700">
+            <span class="block w-6 h-0.5 bg-white mb-1"></span>
+            <span class="block w-6 h-0.5 bg-white mb-1"></span>
+            <span class="block w-6 h-0.5 bg-white"></span>
+        </button>
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full lg:translate-x-0">
+            <div class="h-full px-3 py-4 bg-black border-r border-gray-900">
+                <div class="mb-6 px-2">
+                    <a href="../index.html"><h2 class="text-3xl font-bold text-center">JDM FANS</h2></a>
+                </div>
+                <nav class="space-y-2">
+                    <!-- Marcas de coches -->
+                    <div class="px-2 py-2">
+                        <h2 class="text-gray-200 text-sm uppercase mb-2 px-3 font-semibold">Marcas</h2>
+                        <div class="space-y-1">
+                            <div class="flex items-center">
+                                <img src="/src/images/toyota-logo.png" alt="Toyota Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/toyota.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Toyota</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/nissan-logo.png" alt="Nissan Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/nissan.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Nissan</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/mitsubishi-logo.png" alt="Mitsubishi Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/mitsubishi.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Mitsubishi</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/honda-logo.png" alt="Honda Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/honda.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Honda</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/mazda-logo.png" alt="Mazda Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/mazda.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Mazda</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/acura-logo.png" alt="Acura Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/acura.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Acura</a>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="/src/images/subaru-logo.png" alt="Subaru Logo" class="w-4 h-4 mr-2 filter invert">
+                                <a href="/src/pages/subaru.html" class="block px-3 py-2 rounded-lg hover:bg-black transition-colors">Subaru</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div id="main-content" class="lg:ml-64 min-h-screen flex flex-col">
+            <!-- Header -->
+            <header class="sticky top-0 z-20 bg-gray-800 border-b border-gray-700 shadow-lg">
+                <div class="flex items-center justify-end h-16 px-4 lg:px-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="search" 
+                                   id="searchInput"
+                                   placeholder="Buscar..." 
+                                   class="w-full px-4 py-2 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500 bg-gray-700 text-white placeholder-gray-400"
+                            >
+                            <button id="searchButton" class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <!-- Auth Buttons -->
+                            <div id="auth-buttons">
+                                <a href="../login.html" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-colors">Login</a>
+                                <a href="../register.html" class="px-4 py-2 rounded-lg border border-red-600 hover:bg-red-600 text-white transition-colors">Registro</a>
+                            </div>
+                            
+                            <!-- Profile Menu -->
+                            <div id="profile-menu" class="hidden relative">
+                                <button id="profile-button" class="flex items-center space-x-2 focus:outline-none">
+                                    <img id="profile-icon" src="../profile-default.jpg" alt="Perfil" class="w-8 h-8 rounded-full">
+                                    <span id="username-display" class="text-white"></span>
+                                </button>
+                                
+                                <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-gray-800 border border-gray-700">
+                                    <div class="py-1">
+                                        <a href="../profile.html" class="block px-4 py-2 text-sm text-white hover:bg-red-600 transition-colors">Mi Perfil</a>
+                                        <a href="../favorites.html" class="block px-4 py-2 text-sm text-white hover:bg-red-600 transition-colors">Favoritos</a>
+                                        <button id="logout-button" class="block w-full text-left px-4 py-2 text-sm text-white hover:bg-red-600 transition-colors">Cerrar Sesión</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+<main class="flex-1 p-4 lg:p-6">
+            <!-- Héroe -->
+            <section class="relative h-96 mb-12">
+                <img src="8.jpg" alt="Toyota Supra MK4" class="w-full h-full object-cover rounded-lg">
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                    <h1 class="text-4xl font-bold">Toyota Supra MK4</h1>
+                    <p class="text-xl">El legendario 2JZ-GTE</p>
+                </div>
+            </section>
+
+            <!-- Características -->
+            <section class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold mb-4">Especificaciones Técnicas</h2>
+                    <ul class="space-y-2">
+                        <li><strong>Motor:</strong> 2JZ-GTE 3.0L Twin-Turbo I6</li>
+                        <li><strong>Potencia:</strong> 320 CV (stock)</li>
+                        <li><strong>Par motor:</strong> 427 Nm</li>
+                        <li><strong>Transmisión:</strong> Manual de 6 velocidades / Automática de 4 velocidades</li>
+                        <li><strong>0-100 km/h:</strong> 4.6 segundos</li>
+                        <li><strong>Velocidad máxima:</strong> 250 km/h (limitada)</li>
+                        <li><strong>Peso:</strong> 1,570 kg</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold mb-4">Características Destacadas</h2>
+                    <ul class="space-y-2">
+                        <li>Diseño aerodinámico icónico</li>
+                        <li>Motor altamente modificable</li>
+                        <li>Sistema de suspensión deportiva</li>
+                        <li>Frenos de alto rendimiento</li>
+                        <li>Interior orientado al conductor</li>
+                        <li>Tracción trasera</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Historia -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold mb-6">Historia y Legado</h2>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <p class="mb-4">El Toyota Supra MK4 (A80) se lanzó en 1993 y rápidamente se convirtió en un ícono de la cultura automotriz japonesa. Su desarrollo se centró en crear un deportivo puro, capaz de competir con los mejores superdeportivos europeos de la época.</p>
+                    <p class="mb-4">El corazón del MK4 es su legendario motor 2JZ-GTE, conocido por su increíble resistencia y potencial de modificación. Es común encontrar ejemplares con más de 1000 CV gracias a su robusta construcción.</p>
+                    <p>Su fama se disparó tras su aparición en "The Fast and the Furious" (2001), donde el Supra naranja de Paul Walker se convirtió en uno de los coches más reconocibles de la cultura popular. También ha sido protagonista en numerosos videojuegos y eventos de tuning.</p>
+                </div>
+            </section>
+
+            <!-- Galería -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold mb-6">Galería</h2>
+                <div class="masonry">
+                    <img src="1.jpg" alt="Supra MK4 Frontal" class="rounded-lg">
+                    <img src="2.jpg" alt="Supra MK4 Lateral" class="rounded-lg">
+                    <img src="3.jpg" alt="Supra MK4 Motor" class="rounded-lg">
+                    <img src="4.jpg" alt="Supra MK4 Interior" class="rounded-lg">
+                    <img src="5.jpg" alt="Supra MK4 Trasera" class="rounded-lg">
+                    <img src="6.jpg" alt="Supra MK4 Modificado" class="rounded-lg">
+                    <img src="7.jpg" alt="Supra MK4 Modificado" class="rounded-lg">
+                    <img src="8.jpg" alt="Supra MK4 Modificado" class="rounded-lg">
+                    <img src="173.jpg" alt="Supra MK4 Modificado" class="rounded-lg">
+                    <img src="174.jpg" alt="Supra MK4 Modificado" class="rounded-lg">
+                    <img src="175.jpg" alt="Supra MK4 Modificado" class="rounded-lg">
+                </div>
+            </section>
+
+            <!-- Videos -->
+            <section>
+                <h2 class="text-3xl font-bold mb-6">Videos Destacados</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe src="https://www.youtube.com/embed/jqSxt1sd-_c" frameborder="0" allowfullscreen class="w-full h-96 rounded-lg"></iframe>
+                        <h3 class="text-xl mt-2">Historia del Supra MK4</h3>
+                    </div>
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe src="https://www.youtube.com/embed/tKqq6SAb_1M" frameborder="0" allowfullscreen class="w-full h-96 rounded-lg"></iframe>
+                        <h3 class="text-xl mt-2">Sonido del 2JZ-GTE</h3>
+                    </div>
+                </div>
+            </section>
+        </main>
+            <!-- Footer -->
+            <footer class="bg-gray-800 border-t border-gray-700 py-4">
+                <p class="text-center text-gray-400">&copy; 2025 Catálogo de Coches JDM | Todos los JDM iconicos</p>
+            </footer>
+        </div>
+
+        <script src="../src/js/search.js"></script>
+        <script src="../src/js/sidebar.js"></script>
+        <script>
+            // Initialize any remaining functionality
+            document.addEventListener('DOMContentLoaded', () => {
+                // Add any additional initialization here
+            });
+        </script>
+    </body>
+</html>
+
